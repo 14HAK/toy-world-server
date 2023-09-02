@@ -10,7 +10,7 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   },
 });
-client.connect();
+
 
 const db = client.db('toyWorld');
 

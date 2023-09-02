@@ -21,6 +21,10 @@ const client = new MongoClient(uri, {
 app.use(cors());
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log(req.path, req.method);
+  next()
+})
 
 app.get('/', (req, res) => {
   res.send('hello World!');
@@ -29,6 +33,8 @@ app.get('/', (req, res) => {
 //mongo db operation:
 async function run() {
   try {
+    await client.connect();
+
     await client.db('admin').command({ ping: 1 });
     console.log('MongoDB connection successful!');
 
